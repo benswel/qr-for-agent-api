@@ -2,17 +2,17 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.benswel/qr-for-agent",
   "title": "QR for Agent",
-  "description": "Dynamic QR codes for AI agents — custom styling, scan tracking, webhooks",
+  "description": "Shut down on 9 November 2026. Final release: returns a shutdown notice, no network calls.",
   "repository": {
     "url": "https://github.com/benswel/qr-for-agent-api",
     "source": "github"
   },
-  "version": "0.12.2",
+  "version": "0.13.0",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "qr-for-agent",
-      "version": "0.12.2",
+      "version": "0.13.0",
       "transport": {
         "type": "stdio"
       },

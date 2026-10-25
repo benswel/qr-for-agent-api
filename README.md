@@ -1,12 +1,12 @@
 # QR for Agent
 
-[![benswel/qr-for-agent-api MCP server](https://glama.ai/mcp/servers/benswel/qr-for-agent-api/badges/score.svg)](https://glama.ai/mcp/servers/benswel/qr-for-agent-api)
+> **QR for Agent shut down on 9 November 2026.** The hosted API at api.qrforagent.com is closed, API keys no longer work, and account data is deleted by 9 December 2026. The npm package [`qr-for-agent`](https://www.npmjs.com/package/qr-for-agent) ends with 0.13.0, a release that makes no network calls and only returns the shutdown notice. This repository is archived: the code stays available under the MIT license for self-hosting (see [Deployment](#deployment)), with no support or updates. For a hosted QR code API, see [ohmycode.net/api](https://ohmycode.net/api).
 
 QR-as-a-Service API built for AI agents. Create, update, and track dynamic QR codes programmatically via REST API or MCP (37 tools).
 
 QR codes point to short URLs (`/r/:shortId`) that you can retarget at any time — the QR image never changes, but scanning it goes to the new destination. Multi-tenant by design, with full scan analytics.
 
-**Live API:** [api.qrforagent.com](https://api.qrforagent.com) &nbsp;|&nbsp; **Site:** [qrforagent.com](https://qrforagent.com) &nbsp;|&nbsp; **MCP:** [`qr-for-agent`](https://www.npmjs.com/package/qr-for-agent)
+**MCP package:** [`qr-for-agent`](https://www.npmjs.com/package/qr-for-agent) (final release 0.13.0, notice only)
 
 ## Features
 

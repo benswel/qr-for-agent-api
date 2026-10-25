@@ -4,59 +4,38 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { tools } from "./tools.js";
 
 /**
- * Standalone MCP server for QR for Agent.
+ * Final release of the QR for Agent MCP server.
  *
- * Run with: npx qr-for-agent
- *
- * This exposes all QR management tools via the Model Context Protocol,
- * allowing agents like Claude to call them directly as tools
- * rather than making HTTP requests.
+ * The hosted API shut down on 9 November 2026. This version keeps the tool
+ * names so existing agent configurations get a clear answer, but it makes no
+ * network calls: every tool returns the shutdown notice. Older versions call
+ * api.qrforagent.com, a domain that expires on 24 February 2027.
  */
+const SHUTDOWN_NOTICE =
+  "QR for Agent shut down on 9 November 2026. This MCP server no longer connects to any API, and QR for Agent API keys no longer work. For a hosted QR code API, see https://ohmycode.net/api";
+
 const server = new McpServer({
   name: "qr-for-agent",
-  version: "0.12.0",
+  version: "0.13.0",
 });
 
-// Register each tool from our definitions
-for (const [name, tool] of Object.entries(tools)) {
+// Register every former tool name with the notice only: no input schema,
+// so any call gets the notice instead of a validation error.
+for (const name of Object.keys(tools)) {
   server.tool(
     name,
-    tool.description,
-    tool.inputSchema.shape,
-    async (input: Record<string, unknown>) => {
-      try {
-        const result = await tool.handler(input as any);
-        return {
-          content: [
-            {
-              type: "text" as const,
-              text: JSON.stringify(result, null, 2),
-            },
-          ],
-        };
-      } catch (error) {
-        const message = error instanceof Error ? error.message : String(error);
-        return {
-          content: [
-            {
-              type: "text" as const,
-              text: JSON.stringify({
-                error: message,
-                hint: "Check the input parameters and try again. Use list_qr_codes to verify available QR codes.",
-              }),
-            },
-          ],
-          isError: true,
-        };
-      }
-    }
+    `QR for Agent has shut down: ${name} no longer works and only returns the shutdown notice.`,
+    async () => ({
+      content: [{ type: "text" as const, text: SHUTDOWN_NOTICE }],
+      isError: true,
+    })
   );
 }
 
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("QR for Agent MCP server running on stdio");
+  console.error(SHUTDOWN_NOTICE);
 }
 
 main().catch(console.error);
